@@ -14,7 +14,9 @@ class SwipeActionButton: UIButton {
 
     var maximumImageHeight: CGFloat = 0
     var verticalAlignment: SwipeVerticalAlignment = .centerFirstBaseline
-    
+    // @AlphaApps
+      let imageOffset: CGFloat = 16
+      // !AlphaApps
     
     var currentSpacing: CGFloat {
         return (currentTitle?.isEmpty == false && imageHeight > 0) ? spacing : 0
@@ -61,6 +63,19 @@ class SwipeActionButton: UIButton {
         setImage(action.highlightedImage ?? action.image, for: .highlighted)
     }
     
+    // @AlphaApps
+    convenience init(action: SwipeAction, orientation: SwipeActionsOrientation) {
+        self.init(action: action)
+        if orientation == .right {
+            imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: imageOffset)
+            semanticContentAttribute = .forceLeftToRight
+        } else {
+            semanticContentAttribute = .forceRightToLeft
+            imageEdgeInsets = UIEdgeInsets(top: 0, left: imageOffset, bottom: 0, right: 0)
+        }
+    }
+    // !AlphaApps
+    
     override var isHighlighted: Bool {
         didSet {
             guard shouldHighlight else { return }
@@ -74,7 +89,10 @@ class SwipeActionButton: UIButton {
         let textWidth = titleBoundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)).width
         let imageWidth = currentImage?.size.width ?? 0
         
-        return min(width, max(textWidth, imageWidth) + contentEdgeInsets.left + contentEdgeInsets.right)
+        // @AlphaApps
+              //return min(width, max(textWidth, imageWidth) + contentEdgeInsets.left + contentEdgeInsets.right)
+              return textWidth + imageWidth + (2 * imageOffset)
+              // !AlphaApps
     }
     
     func titleBoundingRect(with size: CGSize) -> CGRect {

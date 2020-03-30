@@ -112,7 +112,11 @@ class SwipeActionsView: UIView {
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = options.backgroundColor ?? #colorLiteral(red: 0.862745098, green: 0.862745098, blue: 0.862745098, alpha: 1)
-        
+        // @AlphaApps
+            self.layer.borderColor = self.options.borderColor?.cgColor ?? UIColor.clear.cgColor
+            self.layer.borderWidth = 1
+            self.layer.cornerRadius = self.options.cornerRadius ?? CGFloat(0)
+            // !AlphaApps
         buttons = addButtons(for: self.actions, withMaximum: maxSize, contentEdgeInsets: contentEdgeInsets)
     }
     

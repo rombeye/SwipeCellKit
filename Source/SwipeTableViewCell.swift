@@ -36,6 +36,18 @@ open class SwipeTableViewCell: UITableViewCell {
     
     weak var tableView: UITableView?
     
+    // @alpha
+    /// height offset
+    public var cellHeightOffset: CGFloat?
+    /// determines if reloadData is called on tableView when deleting this cell (assuming deleteThreshold is satisfied)
+    public var shouldReloadOnDeleteThreshold = false
+    /// used shouldReloadOnDeleteThreshold
+    /// e.g. a value of 2 indicates that when deleting this cell and there are only 2 cell lefts in table (including this one)
+    /// then perform `reloadData` rather than `deleteRows` -- useful for updating header/footer or persistent cells
+    public var deleteThreshold: Int = 0
+    // !alpha
+    
+    
     /// :nodoc:
     open override var frame: CGRect {
         set { super.frame = state.isActive ? CGRect(origin: CGPoint(x: frame.minX, y: newValue.minY), size: newValue.size) : newValue }

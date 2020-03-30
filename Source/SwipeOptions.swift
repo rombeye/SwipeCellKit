@@ -44,6 +44,12 @@ public struct SwipeOptions {
     
     /// The amount of space, in points, between the button image and the button title.
     public var buttonSpacing: CGFloat?
+    // @AlphaApps
+    /// Actions view border color
+    public var borderColor: UIColor?
+    /// Actions view corner radius
+    public var cornerRadius: CGFloat?
+    // !AlphaApps
     
     /// Constructs a new `SwipeOptions` instance with default options.
     public init() {}
